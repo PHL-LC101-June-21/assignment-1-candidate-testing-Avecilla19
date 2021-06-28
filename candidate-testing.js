@@ -6,15 +6,15 @@ const input = require('readline-sync');
 let candidateName = ''
 // TODO 1.2a: Define question, correctAnswer, and candidateAnswer //
 
-let question = ('Who was the first American woman in space? ');
+let question = ('1) Who was the first American woman in space? ');
 let correctAnswer = 'Sally Ride'
 let candidateAnswer = ''
 let questions = [
-  'Who was the first American woman in space? ', 
-  'True or False: 5 kilometer == 5000 meters? ',
-  '(5+3)/2*10 = ? ',  
-  'Give the array [8, "Orbit", "Trajectory", 45], what entry is at index2? ',
-  'What is the minimum crew size for the ISS? '
+  '1) Who was the first American woman in space? \n', 
+  '2) True or False: 5 kilometer == 5000 meters? \n',
+  '3) (5+3)/2*10 = ? \n',  
+  '4) Give the array [8, "Orbit", "Trajectory", 45], what entry is at index2? \n',
+  '5) What is the minimum crew size for the ISS? \n'
 ];
 let correctAnswers = ['Sally Ride', 'True', '40', 'Trajectory', '3'];
 let candidateAnswers = []
@@ -31,39 +31,34 @@ function askQuestion() {
 
   for (let i = 0; i < questions.length; i++) {
     candidateAnswers[i] = input.question(questions[i]) 
-    
-    if (candidateAnswers[i] == correctAnswers[i]){
-      correctAnswers++;
+    if (candidateAnswers[i].toUpperCase() == correctAnswers[i].toUpperCase()){
     }
   }
 }
-console.log(candidateAnswers)
+//console.log(candidateAnswers)
 
 function gradeQuiz(candidateAnswers) {
-
-  // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
-// if (correctAnswer == candidateAnswer) {
-//   console.log('Correct!');
-// } else (console.log('Wrong answer.'));
-  console.log(`First question answered: ${candidateAnswers[0]}, Correct answer is ${correctAnswers[0]}`)
-
-    console.log(`Second Question answered: ${candidateAnswers[1]}, Correct answer is ${correctAnswers[1]}`)
-
-      console.log(`Third question answerd: ${candidateAnswers[2]}, Correct answer is ${correctAnswers[2]}`)
-
-        console.log(`Fourth question answered: ${candidateAnswers[3]}, Correct answer is ${correctAnswers[3]}`)
-
-          console.log(`Fifth Question answered: ${candidateAnswers[4]}, Correct answer is ${correctAnswers[4]}`)
-  let grade;
-  
+correctAnswers = ['Sally Ride', 'True', '40', 'Trajectory', '3'];
+  // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly 
+ let grade = 0
+let graded ;
+    for (let i = 0; i < questions.length; i++ ) {
+      if (candidateAnswers[i].toUpperCase() == correctAnswers[i].toLocaleUpperCase()) {
+    grade += 1
+      } 
+       graded = grade / questions.length * 100;
+//console.log(graded)
+    }
+    if (graded >= 80) 
+    console.log('>>> Grade: 80% Passed! <<<')
+    else (console.log('>>> Test Failed <<<'))
 
   return grade;
 }
-
 function runProgram() {
   askForName();
   // TODO 1.1c: Ask for candidate's name //
-  console.log('Good morning, ' + candidateName);
+  console.log('Candidate Name: ' + candidateName);
   askQuestion();
   gradeQuiz(this.candidateAnswers);
 }
